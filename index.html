@@ -1,0 +1,42 @@
+<HTML>
+<title>Hub Central</title>
+<head>
+<link rel="stylesheet" href="css.css">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+</head>
+<body>
+<header><p>Header</p></header>
+
+Hold on Were in this together
+<footer>
+<div class="clock">
+	
+<div id='overlay'>00:00:00</div>
+	<div class="hours"></div>
+
+	<div class="date"></div>
+</div>
+</footer>
+<script>
+function clock() {
+	var time = new Date(),
+	hours = time.getHours(),
+	minutes = time.getMinutes(),
+	seconds = time.getSeconds();
+	day = time.getDate();
+	var months = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
+	year = time.getFullYear();	
+	document.querySelectorAll('.hours')[0].innerHTML = harold(hours) + ":" + harold(minutes) + ":" + harold(seconds) ;
+	document.querySelectorAll('.date')[0].innerHTML = day+" "+ months[time.getMonth()] +" "+ year;
+  
+  function harold(standIn) {
+    if (standIn < 10) {
+      standIn = '0' + standIn
+    }
+    return standIn;
+  }
+}
+setInterval(clock, 1500);
+</script>
+</body>
+</HTML>
