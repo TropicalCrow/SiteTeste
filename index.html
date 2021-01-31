@@ -1,42 +1,102 @@
 <HTML>
 <title>Hub Central</title>
+
 <head>
-<link rel="stylesheet" href="css.css">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css.css">
+	<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 </head>
+
 <body>
-<header><p>Header</p></header>
+	<header class="h">
+		<div class="icon-bar">
+			<a href="#Death Door" class="active"><img alt="W3Schools" src="skull.png"></a>
+			<a href="#Death Door" class="tooltip"><img alt="W3Schools" src="skull.png"> <span
+					class="tooltiptext">DeathDoor</span></a>
+			<a href="#Death Door" class="tooltip"><img alt="W3Schools" src="skull.png"> <span
+					class="tooltiptext">DeathDoor</span></a>
+			<a href="#Death Door" class="tooltip"><img alt="W3Schools" src="skull.png"> <span
+					class="tooltiptext">DeathDoor</span></a>
+		</div>
+	</header>
+	<content class="pieces">
+		<div class="piece"></div>
+		<div class="piece"></div>
+		<div class="piece"></div>
+		<div class="piece"></div>
+		<div class="piece"></div>
+		<div class="piece"></div>
+		<div class="piece"></div>
+		<div class="piece"></div>
+		<div class="piece"></div>
+		<div class="piece"></div>
+		<div class="piece"></div>
+		<div class="piece"></div>
+	</content>
+	<footer>
+		<div class="forecast">
+			<img src='' id="icone" width="60px">
+			<br />
+			<strong>Toledo</strong><br />
+			<span id="temperatura"></span><br />
+			<span id="clima"></span>
+			<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+				integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
+				</script>
+		</div>
+		<div class="clock">
+			<div id='overlay'>00:00:00</div>
+			<div class="hours"></div>
+			<div class="date"></div>
+		</div>
+	</footer>
+	<script>
+		javascript: (
+			
+			function () {
+				var script = document.createElement('script');
+				script.onload = function () {
+					var stats = new Stats();
+					document.body.appendChild(stats.dom); requestAnimationFrame(
+						function loop() {
+							stats.update();
+							requestAnimationFrame(loop)
+						}
+					);
+				};
 
-Hold on Were in this together
-<footer>
-<div class="clock">
-	
-<div id='overlay'>00:00:00</div>
-	<div class="hours"></div>
-
-	<div class="date"></div>
-</div>
-</footer>
-<script>
-function clock() {
-	var time = new Date(),
-	hours = time.getHours(),
-	minutes = time.getMinutes(),
-	seconds = time.getSeconds();
-	day = time.getDate();
-	var months = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
-	year = time.getFullYear();	
-	document.querySelectorAll('.hours')[0].innerHTML = harold(hours) + ":" + harold(minutes) + ":" + harold(seconds) ;
-	document.querySelectorAll('.date')[0].innerHTML = day+" "+ months[time.getMonth()] +" "+ year;
-  
-  function harold(standIn) {
-    if (standIn < 10) {
-      standIn = '0' + standIn
-    }
-    return standIn;
-  }
-}
-setInterval(clock, 1500);
-</script>
+			}
+		)()
+		$(document).ready(function () {
+			$.get("http://apidev.accuweather.com/currentconditions/v1/40206.json?language=pt&apikey=hoArfRosT1215", function (data) {
+				$('#temperatura').html(data[0].Temperature.Metric.Value + '  Graus');
+				$('#clima').html(data[0].WeatherText);
+				$('#icone').attr('src', 'https://vortex.accuweather.com/adc2010/images/slate/icons/' + data[0].WeatherIcon + '.svg');
+			});
+		});
+		
+	</script>
+	<script>
+		function clock() {
+			var time = new Date(),
+				hours = time.getHours(),
+				minutes = time.getMinutes(),
+				seconds = time.getSeconds();
+			day = time.getDate();
+			var months = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+			year = time.getFullYear();
+			document.querySelectorAll('.hours')[0].innerHTML = harold(hours) + ":" + harold(minutes) + ":" + harold(seconds);
+			document.querySelectorAll('.date')[0].innerHTML = day + " " + months[time.getMonth()] + " " + year;
+			function harold(standIn) {
+				if (standIn < 10) {
+					standIn = '0' + standIn
+				}
+				return standIn;
+			}
+		}
+		setInterval(clock, 1000);
+	</script>
 </body>
+
 </HTML>
